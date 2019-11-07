@@ -15,7 +15,7 @@ class ProductsController extends Controller
     {
        
         $title = 'Alla produkter';
-        return view('pages/index')->with('title', $title);
+        return view('products/index')->with('title', $title);
     
     }
 
@@ -26,7 +26,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Skapa ny produkt';
+        return view('products/create')->with('title', $title);
     }
 
     /**
