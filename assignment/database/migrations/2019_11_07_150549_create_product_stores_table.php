@@ -15,8 +15,10 @@ class CreateProductStoresTable extends Migration
     {
         Schema::create('product_stores', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('product_id');
-            $table->integer('store_id');
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('store_id');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('store_id')->references('id')->on('stores');
             $table->timestamps();
         });
     }
