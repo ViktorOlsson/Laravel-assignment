@@ -14,13 +14,7 @@
 // Route to index page
 Route::get('/', 'PagesController@index');
 
-// CRUD routes for products 
-Route::get('/products', 'ProductsController@index');
-Route::get('/products/create', 'ProductsController@create');
+// CRUD route for products 
+Route::resource('products', 'ProductsController');
 
-// CRUD routes for products
-//Route::post('/products', 'ProductsController@store');
-//Route::get('/products/{$id}', 'ProductsController@show');
-//Route::patch('/products/{id}', 'ProductsController@update');
-//Route::delete('/products/{id}', 'ProductsController@destroy');
-//Route::get('/products/{id}/edit', 'ProductsController@edit');
+
