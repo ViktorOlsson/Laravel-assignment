@@ -2,7 +2,7 @@
  A CRUD application based on Laravel
 
 # 1. Manual configuration
- Create a database called assignment
+ Create a database called laravel
 
 # 2. .env file checklist
  Match the .env variables below with host
