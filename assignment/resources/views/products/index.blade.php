@@ -37,6 +37,15 @@
 
 
        <h1>{{$title}}</h1>
+        @if(count($products) > 1)
+          @foreach ($products as $product)
+            <div>
+                <h3><a href="/products/{{$product->id}}">{{ $product->title }}</h3>
+                </div>
+          @endforeach
+        @else
+            <p>No Products</p>
+        @endif
       
         </div>
     </body>

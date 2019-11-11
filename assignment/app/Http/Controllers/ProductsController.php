@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use App\Product;
 
 class ProductsController extends Controller
 {
@@ -15,7 +19,8 @@ class ProductsController extends Controller
     {
        
         $title = 'Alla produkter';
-        return view('products/index')->with('title', $title);
+        $products = Product::all();
+        return view('products/index')->with('title', $title)->with('products', $products);
     
     }
 
