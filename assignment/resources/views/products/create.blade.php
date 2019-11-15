@@ -13,31 +13,48 @@
        
     </head>
     <body>
-      {{-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="../">{{config('app.name', 'Laravel')}}</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="../">Start<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./">Produkter<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./create">Ny produkt</a>
-            </li>
-          </ul>
-        </div>
-      </nav> --}}
-      @include('layouts.app')
-        <div class="container">
+      @extends('layouts.app')
+
+@section('content')
+<div class="container">
+
+    
 
 
-       <h1>{{$title}}</h1>
-      
+    <h1>Skapa Produkt</h1>
+    {{ Form::open(['action' => 'ProductsController@store', 'method' => 'POST']) }}
+        <div class="form-group">
+            {{ Form::label('title', 'Title') }}
+            {{ Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Title']) }}
         </div>
+        <div class="form-group">
+            {{ Form::label('brand', 'Märke') }}
+            {{ Form::text('brand', '', ['class' => 'form-control', 'placeholder' => 'Märke']) }}
+        </div>
+        <div class="form-group">
+            {{ Form::label('price', 'Pris') }}
+            {{ Form::text('price', '', ['class' => 'form-control', 'placeholder' => 'Pris']) }}
+        </div>
+        <div class="form-group">
+            {{ Form::label('image', 'Bild') }}
+            {{ Form::text('image', '', ['class' => 'form-control', 'placeholder' => 'Länk till bild']) }}
+        </div>
+        <div class="form-group">
+            {{ Form::label('description', 'Beskrivning') }}
+            {{ Form::textarea('description', '', ['class' => 'form-control', 'placeholder' => 'Beskrivning...']) }}
+        </div>
+        
+        @foreach ($stores as $store)
+
+        <div class="form-group">
+            <label for="{{$store->name}}">{{$store->name}}</label>
+            <input type="checkbox" class="checkbox1" name="stores[{{$store->id}}]" value="{{$store->id}}">
+        </div>
+        @endforeach
+        {{ Form::submit('Submit', ['class' => 'btn btn-primary']) }}
+       {{ Form::close() }}
+      </div>
+
+@endsection
     </body>
 </html>

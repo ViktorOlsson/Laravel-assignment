@@ -7,6 +7,10 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Product;
+use App\Store;
+use App\ProductStore;
+use App\Review;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -32,7 +36,8 @@ class ProductsController extends Controller
     public function create()
     {
         $title = 'Skapa ny produkt';
-        return view('products/create')->with('title', $title);
+        $stores = Store::all();
+        return view('products/create')->with('title', $title)-> with('stores', $stores);
     }
 
     /**
@@ -43,8 +48,41 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+            'brand' => 'required',
+            'image' => 'required',
+            'price' => 'required'
+        ]);
+
+        $product = new Product;
+        $product->title = $request->input('title');
+        $product->brand = $request->input('brand');
+        $product->price = $request->input('price');
+        $product->description = $request->input('description');
+        $product->image = $request->input('image');
+        $product->save();
+
+        // Gets id of newest product ie id of above product
+        $productId = DB::table('products')->select('id')->latest('created_at')->first();
+
+        // Loops each store id from form
+        foreach ($request->get("stores") as $storeId) {
+            $productStore = new ProductStore;
+            
+            echo $storeId;
+            // Assigns store id and product id to productStore
+            $productStore->product_id = $productId->id;
+            $productStore->store_id = $storeId;
+            $productStore->save();
+        }
+        return redirect('/products')->with('success', 'Produkt skapad');
     }
+
+      
+    
+    
 
     /**
      * Display the specified resource.
