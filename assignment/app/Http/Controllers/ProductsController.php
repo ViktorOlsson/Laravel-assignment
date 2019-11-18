@@ -143,6 +143,10 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+      ProductStore::where('product_id',$id)->delete();
+      Review::where('product_id',$id)->delete();
+      $product = Product::find($id);
+      $product->delete();
+      return redirect('/products')->with('success', 'Produkt borta');
     }
 }
