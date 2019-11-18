@@ -92,7 +92,24 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+      $product = Product::find($id);
+      $product_stores = ProductStore::where('product_id', $id)->get();
+      $reviews = Review::where('product_id', $id)->get();
+
+      $product->{"reviews"} = $reviews;
+      $store_list = array();
+
+      foreach($product_stores as $product_store) {
+        $fetchStores = Store::where('id', $product_store->store_id)->get();
+        foreach($fetchStores as $fetchStore) {
+          $store_object = $fetchStore;
+          $store_object->{"pivot"} = $product_store;
+          $store_list[] = $store_object;
+        }
+      }
+      $product->{"stores"} = $store_list;
+      //return $product;
+      return view('products.product')->with('product', $product);
     }
 
     /**
