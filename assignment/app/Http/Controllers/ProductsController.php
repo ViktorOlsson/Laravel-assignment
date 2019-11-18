@@ -120,7 +120,23 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+      $product = Product::find($id);
+      $product_stores = ProductStore::where('product_id', $id)->get();
+      $reviews = Review::where('product_id', $id)->get();
+
+      $product->{"reviews"} = $reviews;
+      $store_list = array();
+
+      foreach($product_stores as $product_store) {
+        $fetchStores = Store::where('id', $product_store->store_id)->get();
+        foreach($fetchStores as $fetchStore) {
+          $store_object = $fetchStore;
+          $store_object->{"pivot"} = $product_store;
+          $store_list[] = $store_object;
+        }
+      }
+      $product->{"stores"} = $store_list;
+      return view('products.edit')->with('product', $product);
     }
 
     /**
@@ -132,7 +148,33 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate($request, [
+        'title' => 'required',
+        'description' => 'required',
+        'brand' => 'required',
+        'image' => 'required',
+        'price' => 'required'
+    ]);
+
+    $products = Product::find($id);
+    $products->title = $request->input('title');
+    $products->description = $request->input('description');
+    $products->brand = $request->input('brand');
+    $products->image = $request->input('image');
+    $products->price = $request->input('price');
+    $products->save();
+
+    $remove_productstore = ProductStore::where('product_id', $id);
+    $remove_productstore->delete();
+    $stores = $request->input('stores');
+    foreach($stores as $store) {
+      $storeInt = intval($store);
+      $add_product_store = new ProductStore;
+      $add_product_store->store_id = $storeInt;
+      $add_product_store->product_id = $id;
+      $add_product_store->save();
+    }
+    return redirect('/products')->with('success', 'Produkt updaterad');
     }
 
     /**
