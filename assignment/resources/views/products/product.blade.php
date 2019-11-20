@@ -24,6 +24,9 @@
         @foreach($product->stores as $store)
           <p>{{ $store->name }}, {{ $store->city }}</p>
         @endforeach
+        <div class="w-50">
+          <img src={{ $product->image }} class="img-thumbnail" />
+        </div>
         <h4>Recensioner</h4>
         @foreach($product->reviews as $review)
           <p>{{ $review->comment }}</p>
