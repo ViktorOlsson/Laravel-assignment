@@ -17,10 +17,7 @@
 
 @section('content')
 <div class="container">
-
-    
-
-
+    @if(!Auth::guest())
     <h1>Skapa Produkt</h1>
     {{ Form::open(['action' => 'ProductsController@store', 'method' => 'POST']) }}
         <div class="form-group">
@@ -53,6 +50,9 @@
         @endforeach
         {{ Form::submit('Submit', ['class' => 'btn btn-primary']) }}
        {{ Form::close() }}
+       @else
+        <h1>Du måste logga in för att skapa nya produkter!</h1>
+       @endif
       </div>
 
 @endsection

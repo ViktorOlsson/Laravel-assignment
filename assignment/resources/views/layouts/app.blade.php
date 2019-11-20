@@ -32,9 +32,11 @@
                 <a class="navbar-brand" href="{{ url('/products') }}">
                   Produkter
                 </a>
+                @if(!Auth::guest())
                 <a class="navbar-brand" href="{{ url('/products/create') }}">
                   Ny produkt
                 </a>
+                @endif
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
