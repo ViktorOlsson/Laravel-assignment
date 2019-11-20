@@ -17,8 +17,9 @@ Route::get('/', 'PagesController@index');
 // CRUD route for products 
 Route::resource('products', 'ProductsController');
 
+//
+Route::get('/stores', 'StoresController@index');
 
-
+// Authentication 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
