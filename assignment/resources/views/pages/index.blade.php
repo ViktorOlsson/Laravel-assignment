@@ -13,31 +13,34 @@
        
     </head>
     <body>
-      {{-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="./">{{config('app.name', 'Laravel')}}</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="./">Start<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./products">Produkter<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./products/create">Ny produkt</a>
-            </li>
-          </ul>
-        </div>
-      </nav> --}}
+     
         @include('layouts.app')
         <div class="container">
 
 
        <h1>{{$title}}</h1>
+    
+
+       <p>Denna applikation använder sig av följande url:er enligt CRUD standard</p>
+
+       <ul class="list-group mb-2">
+        <li class="list-group-item">GET products/</li>
+        <li class="list-group-item">GET products/id</li>
+
+        <li class="list-group-item">POST products/ (kräver inloggning)</li>
+        <li class="list-group-item">PATCH products/id  (kräver inloggning)</li>
+        <li class="list-group-item">DELETE products/id  (kräver inloggning)</li>
+      </ul>
+
+      <ul class="list-group mb-2">
+        <li class="list-group-item">GET reviews/</li>
+      </ul>
+
+      <ul class="list-group mb-2">
+        <li class="list-group-item">GET stores/</li>
+      </ul>
       
+        </div>
         </div>
     </body>
 </html>
