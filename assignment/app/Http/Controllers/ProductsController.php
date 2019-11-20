@@ -71,7 +71,6 @@ class ProductsController extends Controller
         foreach ($request->get("stores") as $storeId) {
             $productStore = new ProductStore;
             
-            echo $storeId;
             // Assigns store id and product id to productStore
             $productStore->product_id = $productId->id;
             $productStore->store_id = $storeId;
