@@ -17,8 +17,11 @@ Route::get('/', 'PagesController@index');
 // CRUD route for products 
 Route::resource('products', 'ProductsController');
 
-//
+// Route to stores
 Route::get('/stores', 'StoresController@index');
+
+// Route to reviews
+Route::get('/reviews', 'ReviewsController@index');
 
 // Authentication 
 Auth::routes();
