@@ -18,8 +18,8 @@
           <h1>Redigera Produkt</h1>
         {{ Form::open(['action' => ['ProductsController@update', $product->id], 'method' => 'POST']) }}
         <div class="form-group">
-            {{ Form::label('title', 'Title') }}
-            {{ Form::text('title', $product->title, ['class' => 'form-control', 'placeholder' => 'Title']) }}
+            {{ Form::label('title', 'Titel') }}
+            {{ Form::text('title', $product->title, ['class' => 'form-control', 'placeholder' => 'Titel']) }}
         </div>
         <div class="form-group">
             {{ Form::label('brand', 'Märke') }}
@@ -85,7 +85,7 @@
             
         </div>
         {{ Form::hidden('_method', 'PUT') }}
-        {{ Form::submit('Submit', ['class' => 'btn btn-primary']) }}
+        {{ Form::submit('Uppdatera', ['class' => 'btn btn-success']) }}
     {{ Form::close() }}
         </div>
     </body>
