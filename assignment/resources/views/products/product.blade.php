@@ -30,9 +30,6 @@
         @foreach($product->stores as $store)
         <li class="list-group-item">{{ $store->name }}, {{ $store->city }}</li>
         @endforeach
-        <div class="w-50">
-          <img src={{ $product->image }} class="img-thumbnail" />
-        </div>
         <h4>Recensioner</h4>
         @foreach($product->reviews as $review)
 
