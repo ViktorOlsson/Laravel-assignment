@@ -13,16 +13,16 @@
        
     </head>
     <body>
-      @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
     @if(!Auth::guest())
-    <h1>Skapa Produkt</h1>
+    <h1>Ny produkt</h1>
     {{ Form::open(['action' => 'ProductsController@store', 'method' => 'POST']) }}
         <div class="form-group">
-            {{ Form::label('title', 'Title') }}
-            {{ Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Title']) }}
+            {{ Form::label('title', 'Titel') }}
+            {{ Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Titel']) }}
         </div>
         <div class="form-group">
             {{ Form::label('brand', 'Märke') }}
@@ -48,7 +48,7 @@
             <input type="checkbox" class="checkbox1" name="stores[{{$store->id}}]" value="{{$store->id}}">
         </div>
         @endforeach
-        {{ Form::submit('Submit', ['class' => 'btn btn-primary']) }}
+        {{ Form::submit('Uppdatera', ['class' => 'btn btn-success']) }}
        {{ Form::close() }}
        @else
         <h1>Du måste logga in för att skapa nya produkter!</h1>

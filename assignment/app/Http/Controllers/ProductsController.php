@@ -22,7 +22,7 @@ class ProductsController extends Controller
     public function index()
     {
        
-        $title = 'Alla produkter';
+        $title = 'Produkter';
         $products = Product::all();
         return view('products/index')->with('title', $title)->with('products', $products);
     
@@ -35,7 +35,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $title = 'Skapa ny produkt';
+        $title = 'Ny produkt';
         $stores = Store::all();
         return view('products/create')->with('title', $title)-> with('stores', $stores);
     }
