@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
+
+
+
+    public function __construct(){
+      $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,6 +41,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
+
+      
         $title = 'Ny produkt';
         $stores = Store::all();
         return view('products/create')->with('title', $title)-> with('stores', $stores);
@@ -48,6 +56,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
+        $invalidStoreId =false;
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
@@ -69,14 +78,33 @@ class ProductsController extends Controller
 
         // Loops each store id from form
         foreach ($request->get("stores") as $storeId) {
+
+            $checkValidStoreId = DB::table('stores')->where('id', $storeId)->count();
+
             $productStore = new ProductStore;
             
             // Assigns store id and product id to productStore
-            $productStore->product_id = $productId->id;
-            $productStore->store_id = $storeId;
-            $productStore->save();
+            // Checks if store is in database
+
+            if($checkValidStoreId == 1){
+              $productStore->product_id = $productId->id;
+              $productStore->store_id = $storeId;
+              $productStore->save();
+
+            }
+            else{
+              $invalidStoreId =true;
+            }
         }
-        return redirect('/products')->with('success', 'Produkt skapad');
+
+        if ($invalidStoreId == true){
+          return response()->json("Invalid indata", 400);
+
+        }
+        else{
+          return redirect('/products')->with('success', 'Produkt skapad');
+        }
+        
     }
 
       
@@ -119,6 +147,7 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
+
       $product = Product::find($id);
       $product_stores = ProductStore::where('product_id', $id)->get();
       $reviews = Review::where('product_id', $id)->get();
@@ -147,6 +176,7 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
+
       $this->validate($request, [
         'title' => 'required',
         'description' => 'required',
@@ -184,6 +214,7 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
+
       ProductStore::where('product_id',$id)->delete();
       Review::where('product_id',$id)->delete();
       $product = Product::find($id);
