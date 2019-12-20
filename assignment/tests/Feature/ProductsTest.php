@@ -10,43 +10,49 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class ProductsTest extends TestCase
 {
 
+    /** A basic test to see if we can get all products */
     /** @test */
-    public function get_all_products()
+    public function getAllProducts()
     {
         $response = $this->get('/products');
         $response->assertStatus(200);
     }
 
+    /** A basic test to see if it is possible to get only one product, other wise a lot of other functionallity would not work */
     /** @test */
-    public function get_one_product()
+    public function getOneProduct()
     {
         $response = $this->get('/products/1');
         $response->assertStatus(200);
     }
 
+    /** Checks if we have access to all stores */
     /** @test */
-    public function get_all_stores()
+    public function getAllStores()
     {
         $response = $this->get('/stores');
         $response->assertStatus(200);
     }
 
+    /** Checks if we have access to all reviews */
     /** @test */
-    public function get_all_reviews()
+    public function getAllReviews()
     {
         $response = $this->get('/reviews');
         $response->assertStatus(200);
     }
     
+    /** Makes sure that any unauthorised user cannot access, important for integrity of the system */
     /** @test */
-    public function unauthenticated_users_can_not_access_edit()
+    public function unauthenticatedUsersCanNotAccessEdit()
     {
         $response = $this->get('/products/1/edit')
             ->assertRedirect('/login');
     }
 
+    /** Makes sure that any authorised user can acctually access the system */
     /** @test */
-    public function authenticated_users_can_access_edit()
+    public function authenticatedUsersCanAccessEdit()
     {
         $this->actingAs(factory (User::class)->create());
 
@@ -54,15 +60,17 @@ class ProductsTest extends TestCase
         ->assertOk();
     }
 
+    /** Makes sure that any unauthorised user cannot access, important for integrity of the system */
     /** @test */
-    public function unauthenticated_users_can_not_access_create()
+    public function unauthenticatedUsersCanNotAccessCreate()
     {
         $response = $this->get('/products/create')
             ->assertRedirect('/login');
     }
 
+    /** Makes sure that any authorised user can acctually access the system */
     /** @test */
-    public function authenticated_users_can_access_create()
+    public function authenticatedUsersCanAccessCreate()
     {
         $this->actingAs(factory (User::class)->create());
 
@@ -70,9 +78,10 @@ class ProductsTest extends TestCase
         ->assertOk();
     }
 
+    /** Makes sure that any authorised user can acctually post a new product */
     /** Redirected with success = 302 */
     /** @test */
-    public function authenticated_users_can_post_new_product()
+    public function authenticatedUsersCanPostNewProduct()
     {
         $this->actingAs(factory (User::class)->create());
 
@@ -87,8 +96,9 @@ class ProductsTest extends TestCase
 
     }
 
+    /** For integirty reasons it is important that only logged in users can make a new product */
     /** @test */
-    public function unauthenticated_users_can_not_post_new_product()
+    public function unauthenticatedUsersCanNotPostNewProduct()
     {
         $response = $this->post('/products', [
             'title' => 'PRODUCT NAME',
@@ -101,8 +111,10 @@ class ProductsTest extends TestCase
 
     }
 
+    /** Only logged in users can update a product */
+
     /** @test */
-    public function authenticated_users_can_patch_product()
+    public function authenticatedUsersCanPatchProduct()
     {
         $this->actingAs(factory (User::class)->create());
 
@@ -117,8 +129,9 @@ class ProductsTest extends TestCase
 
     }
 
+    /** Only authenticated users can update a product */
     /** @test */
-    public function unauthenticated_users_can_not_patch_product()
+    public function unauthenticatedUsersCanNotPatchProduct()
     {
 
         $response = $this->patch('/products/1', [
@@ -132,8 +145,9 @@ class ProductsTest extends TestCase
 
     }
 
+    /** Makes sure that any authorised user can acctually delete a product */
     /** @test */
-    public function authenticated_users_can_delete_product()
+    public function authenticatedUsersCanDeleteProduct()
     {
         $this->actingAs(factory (User::class)->create());
         $response = $this->delete('/products/1')
@@ -141,8 +155,9 @@ class ProductsTest extends TestCase
 
     }
 
+    /** Makes sure that any unauthorised user can not delete a product */
     /** @test */
-    public function unauthenticated_users_can_not_delete_product()
+    public function unauthenticatedUsersCanNotDeleteProduct()
     {
         $response = $this->delete('/products/2')
             ->assertRedirect('/login');
@@ -150,9 +165,10 @@ class ProductsTest extends TestCase
     }
 
 
+    /** It is important to make sure that any user who tries to input invalid data cannot do so */
     /** 'description', 'price' and 'store' has been given invalid data*/
     /** @test */
-    public function authenticated_users_can_not_post_invalid_data()
+    public function authenticatedUsersCanNotPostInvalidData()
     {
         $this->actingAs(factory (User::class)->create());
 
@@ -168,4 +184,3 @@ class ProductsTest extends TestCase
     }
 
 }
-
