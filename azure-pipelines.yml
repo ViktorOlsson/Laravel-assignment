@@ -10,15 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-- phpVersion: 7.2
-
-- group: assignment_group_name
-- name: dockerId
-  value: 'assignment'
-- name: dockerPassword
-  value: 'PYqTN5ZmSh6w91l5x=LEK18wMIbKN0X4'
-- name: imageName
-  value: 'assignment'
+  phpVersion: 7.2
 
   
 
@@ -36,10 +28,7 @@ steps:
   displayName: 'composer install'
 
 
-
-
-
 - script: |
-    docker build -t $(dockerId).azurecr.io/$(imageName) .
-    docker login -u $(dockerId) -p $(dockerPassword) $(dockerId).azurecr.io
-    docker push $(dockerId).azurecr.io/$(imageName):latest
+    docker build -t assignment.azurecr.io/assignment .
+    docker login -u assignment -p PYqTN5ZmSh6w91l5x=LEK18wMIbKN0X4 assignment.azurecr.io
+    docker push assignment.azurecr.io/assignment:latest
