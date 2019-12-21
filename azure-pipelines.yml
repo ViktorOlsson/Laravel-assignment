@@ -10,7 +10,15 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
+- group: assignment_group_name
+- name: dockerId
+  value: 'assignment'
+- name: dockerPassword
+  value: 'PYqTN5ZmSh6w91l5x=LEK18wMIbKN0X4'
+- name: imageName
+  value: 'assignment'
   phpVersion: 7.2
+  
 
 steps:
 - script: |
@@ -26,14 +34,6 @@ steps:
   displayName: 'composer install'
 
 
-variables:
-- group: assignment_group_name
-- name: dockerId
-  value: 'assignment'
-- name: dockerPassword
-  value: 'PYqTN5ZmSh6w91l5x=LEK18wMIbKN0X4'
-- name: imageName
-  value: 'assignment'
 
 
 
