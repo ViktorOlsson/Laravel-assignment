@@ -17,7 +17,7 @@ variables:
   value: 'PYqTN5ZmSh6w91l5x=LEK18wMIbKN0X4'
 - name: imageName
   value: 'assignment'
-  phpVersion: 7.2
+- phpVersion: 7.2
   
 
 steps:
