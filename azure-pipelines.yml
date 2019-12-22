@@ -31,4 +31,5 @@ steps:
 - script: |
     docker build -t assignment.azurecr.io/assignment .
     docker login -u assignment -p PYqTN5ZmSh6w91l5x=LEK18wMIbKN0X4 assignment.azurecr.io
-    docker push assignment.azurecr.io/assignment:latest
+    docker push -t -p 8181:8181 assignment.azurecr.io/assignment:latest
+    
