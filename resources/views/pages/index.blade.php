@@ -18,7 +18,7 @@
         <div class="container">
 
 
-       <h1>{{$title}} Version 3.0</h1>
+       <h1>{{$title}} Version 4.0</h1>
        <p>Denna applikation använder sig av följande url:er enligt CRUD standard</p>
 
        <ul class="list-group mb-2">
