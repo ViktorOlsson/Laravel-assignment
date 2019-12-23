@@ -26,7 +26,7 @@ steps:
     displayName: "composer install"
 
   - script: php artisan migrate:refresh --seed --env=production --force
-    displaayName: "Seed Database"
+    displayName: "Seed Database"
 
   - script: phpunit
     displayName: "Run tests with phpunit"
