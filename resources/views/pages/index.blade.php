@@ -42,6 +42,6 @@
       
         </div>
         </div>
-        <p>Version 2.5</p>
+        <p>Version 2.6</p>
     </body>
 </html>
