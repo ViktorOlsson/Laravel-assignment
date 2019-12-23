@@ -27,5 +27,10 @@ steps:
 - script: composer install --no-interaction --prefer-dist
   displayName: 'composer install'
 
+- script: phpunit
+  displayName: "Run tests with phpunit"
 
-    
+- script: |
+    docker build -t $(dockerId).azurecr.io/$(imageName) .
+    docker login -u $(dockerId) -p $(dockerPassword) $(dockerId).azurecr.io
+    docker push $(dockerId).azurecr.io/$(imageName):latest
