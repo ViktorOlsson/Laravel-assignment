@@ -25,5 +25,8 @@ steps:
   - script: composer install --no-interaction --prefer-dist
     displayName: "composer install"
 
+  - script: php artisan migrate:refresh --seed --env=production --force
+    displaayName: "Seed Database"
+
   - script: phpunit
     displayName: "Run tests with phpunit"
