@@ -25,3 +25,7 @@ Match the .env file variables below with host
 # 4. App Url
 
 -   https://da288aalexanderviktor.azurewebsites.net/
+
+# 5. Tester
+
+-   Tester finns i tests/Features/productsTest.php

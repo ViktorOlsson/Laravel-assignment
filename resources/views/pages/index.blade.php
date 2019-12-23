@@ -18,9 +18,7 @@
         <div class="container">
 
 
-       <h1>{{$title}}</h1>
-    
-       <h2>Version 2.1</h2>
+       <h1>{{$title}} Version 3.0</h1>
        <p>Denna applikation använder sig av följande url:er enligt CRUD standard</p>
 
        <ul class="list-group mb-2">
@@ -42,6 +40,5 @@
       
         </div>
         </div>
-        <p>Version 2.7.7</p>
     </body>
 </html>
