@@ -18,9 +18,7 @@ Route::get('/', 'PagesController@index');
 Route::resource('products', 'ProductsController');
 
 // Route to stores
-Route::get('/stores', function() {
-  return('HEJ');
-});
+Route::get('/stores', 'StoresController@index');
 
 // Route to reviews
 Route::get('/reviews', 'ReviewsController@index');
